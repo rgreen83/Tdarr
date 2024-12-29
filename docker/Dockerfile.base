@@ -174,16 +174,16 @@ RUN apt-get update &&  \
         ln -s /usr/bin/ffmpeg /usr/local/bin/tdarr-ffmpeg ; \
     fi && \
 #
-    trash-empty && \
+    trash-empty -f && \
         if uname -m | grep -q x86; then \
             apt-get clean && \
             apt purge -y \
-                libstd-rust-dev \
-                libstd-rust-1.65 \
                 libicu-dev \
-                cargo \
                 git \
-                cmake \
+                cmake ;\
+                # cargo \
+                # libstd-rust-dev \
+                # libstd-rust-1.65 \
                 # g++-9 ## g++-13 in noble? \
                 # gcc-9 ## gcc-13 in noble? \
                 # libc6-dev \
@@ -191,6 +191,6 @@ RUN apt-get update &&  \
                 # cpp-9 ## cpp-13 in noble? \
                 # libgcc-9-dev ## libgcc-13-dev in noble? \
                 # libllvm12 \
-                # python3-pip ; \
+                # python3-pip ## no longer used \
         fi && \
     apt autoremove -y
