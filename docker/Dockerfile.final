@@ -21,7 +21,7 @@ RUN echo $MODULE && echo $VERSION && echo $DATE && \
         echo removing /tdarr_server && \
         rm -rdf /etc/services.d/tdarr_server ; \
     fi && \
-    
+#
     apt-get update && apt-get install -y curl unzip mkvtoolnix libtesseract-dev && \
     if uname -m | grep -q x86; then \    
         MODULE_LINK="${BASE_LINK}/linux_x64/${MODULE}_$DATE.zip" && \
@@ -35,7 +35,7 @@ RUN echo $MODULE && echo $VERSION && echo $DATE && \
         MODULE_LINK="${BASE_LINK}/linux_arm/${MODULE}_$DATE.zip" && \
         NODE_LINK="${BASE_LINK}/linux_arm/Tdarr_Node_$DATE.zip" ; \
     fi && \
-
+#
     echo MODULE_LINK=$MODULE_LINK && \
     echo NODE_Link=$NODE_LINK && \
     curl --connect-timeout 120 --retry 5 -o /tmp/$MODULE.zip -L \
@@ -48,14 +48,14 @@ RUN echo $MODULE && echo $VERSION && echo $DATE && \
     fi && \
     rm -rdf /tmp/$MODULE.zip && \
     rm -rdf /tmp/Tdarr_Node.zip && \
-
+#
     cp -r /app /app_test && \
     runTests=true runDockerTests=true /app_test/$MODULE/$MODULE && \
     if [ "$MODULE" = "Tdarr_Server" ]; then \
            runTests=true runDockerTests=true /app_test/Tdarr_Node/Tdarr_Node ; \
     fi && \
     rm -rdf /app_test && \
-
+#
     trash-empty && \
     apt-get autoremove -y
 
